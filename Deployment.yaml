@@ -1,0 +1,21 @@
+kind: Deployment
+matadata: 
+  name: django-face-gke
+spec:
+  replicas: 3
+  selecttor:
+    matchLabels:
+      app: django-face-gke
+  template:
+    metadata:
+      lable:
+        app: django-face-gke
+    spec:
+      containers:
+      - name: django-face-gke
+        image: gcr.io/spheric-almanac-379120/django-face-gke:latest
+        ports:
+        - containerPort: 8080
+        env:
+          - name: PORT
+            value: "8080"
