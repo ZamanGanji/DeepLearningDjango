@@ -1,4 +1,4 @@
-# DeepLearningDjango
+## DeepLearningDjango
 In this files I try to deploy the combination of the Django web application and deeplearning project implement by openCV for object detections.
 The deployment is employed on Kubernetes and GCP
 
@@ -15,7 +15,7 @@ and after making ana image in Docker Deslktop write in cmd as
 
 docker run -p 8001:8000 -it --rm django-face
 
-# running on Kubernetes and GCP
+## running on Kubernetes and GCP
 
 create an account in google ang go to google cloud platform console.
 Then in Cloud Shell Editor write 
@@ -35,9 +35,9 @@ for applynig the Kubernetes on GCP type the following commands on Cloud Shell Ed
 kubectl apply -f deployment.yaml
 
 and
-
+```bash
 kubectl apply -f services.yaml
-
+```
 
 finally the external id for LoadBalancer can be used as main IP for runing the apllication.
 
