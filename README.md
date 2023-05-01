@@ -14,36 +14,7 @@ In conclusion, the successful deployment of this Django web application and Open
 
 To deploy the application on a localized Docker environment, follow these steps to create an image:
 
-1. Set up a Dockerfile: Create a file called "Dockerfile" (with no file extension) in the root directory of your project. This file will define the steps needed to build your Docker image.
-
-2. Specify the base image: In the Dockerfile, start by specifying the base image you want to use. For example, if you are working with Python, you can use the official Python base image. Add the following line at the beginning of your Dockerfile:
-   ```
-   FROM python:3.9
-   ```
-
-3. Copy project files: Next, copy your project files into the Docker image. Use the `COPY` command in your Dockerfile to copy the necessary files and directories from your local machine to the image. For example, if your project files are in the current directory, add the following line to your Dockerfile:
-   ```
-   COPY . /app
-   ```
-
-4. Install dependencies: If your project requires any dependencies, add the necessary commands to install them. Typically, you would use the `RUN` command in your Dockerfile to execute shell commands. For example, if you have a `requirements.txt` file listing your Python dependencies, add the following lines to your Dockerfile:
-   ```
-   WORKDIR /app
-   RUN pip install -r requirements.txt
-   ```
-
-5. Expose necessary ports: If your application requires specific ports to be exposed, use the `EXPOSE` command in your Dockerfile. For example, if your Django application runs on port 8000, add the following line to your Dockerfile:
-   ```
-   EXPOSE 8000
-   ```
-
-6. Define the entry point: Finally, specify the command that should be executed when the Docker container starts. This is typically the command to run your application. Use the `CMD` or `ENTRYPOINT` command in your Dockerfile. For example, if your Django application uses `manage.py` to start the server, add the following line:
-   ```
-   COPY . /code/
-   CMD python manage.py runserver 0.0.0.0:8000
-   ```
-
-7. Build the Docker image: Open a terminal or command prompt and navigate to the directory where your Dockerfile is located. Run the following command to build the Docker image:
+Build the Docker image: Open a terminal or command prompt and navigate to the directory where your Dockerfile is located. Run the following command to build the Docker image:
    ```bash
    docker build . -t your-image-name
    ```
