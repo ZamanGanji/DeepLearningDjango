@@ -39,6 +39,7 @@ To deploy the application on a localized Docker environment, follow these steps 
 
 6. Define the entry point: Finally, specify the command that should be executed when the Docker container starts. This is typically the command to run your application. Use the `CMD` or `ENTRYPOINT` command in your Dockerfile. For example, if your Django application uses `manage.py` to start the server, add the following line:
    ```
+   COPY . /code/
    CMD python manage.py runserver 0.0.0.0:8000
    ```
 
