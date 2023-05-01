@@ -43,35 +43,31 @@ To deploy the application on a localized Docker environment, follow these steps 
    ```
 
 7. Build the Docker image: Open a terminal or command prompt and navigate to the directory where your Dockerfile is located. Run the following command to build the Docker image:
-   ```
-   docker build -t your-image-name .
+   ```bash
+   docker build . -t your-image-name
    ```
 
    Replace "your-image-name" with a meaningful name for your Docker image.
 
 After successfully building the Docker image, you can proceed with running a Docker container using the created image.
 
-
-For deployment on localized Docker, first, create an image by 
-```bash
-docker build . -t django-face 
-```
-
 And after making an image in Docker Desktop, write in cmd as
 
 ```bash
-docker run -p 8001:8000 -it --rm django-face
+docker run -p 8001:8000 -it --rm your-image-name
 ```
 ## Running on Kubernetes and GCP
 
-Create an account in google and go to the google cloud platform console.
-Then in Cloud Shell Editor, write 
 
+To begin the deployment process on Docker-based Google Cloud Platform (GCP), the first step is to create a Google account and access the Google Cloud Platform console. Once logged in, navigate to the Cloud Shell Editor, a powerful integrated development environment (IDE) provided by Google Cloud Platform.
+
+Within the Cloud Shell Editor, execute the following command to build and submit your Docker image to the Google Container Registry (GCR):
 ```bash
 gcloud builds submit --tag gcr.io/spheric-almanac-379120/django-face-gke .
 ```
-For running applications on Docker-based GCP, execute this command on Cloud Shell
+Make sure to replace `gcr.io/spheric-almanac-379120/django-face-gke` with the desired repository name for your Docker image.
 
+After successfully building and submitting the image, the next step is to create a Kubernetes cluster on Google Cloud Platform. This can be achieved by running the following command in the Cloud Shell:
 ```bash
 gcloud container clusters create django-face-gke-clusters \
     --num-nodes 1 \
@@ -79,15 +75,20 @@ gcloud container clusters create django-face-gke-clusters \
     --issue-client-certificates \
     --zone us-central1-a
 ```
-For applying the Kubernetes on GCP, type the following commands on Cloud Shell Editor
+Feel free to modify the cluster name (`django-face-gke-clusters`) and other parameters as per your requirements.
 
+Once the Kubernetes cluster is successfully created, you can proceed to apply the Kubernetes deployment configuration. Execute the following command in the Cloud Shell Editor:
 ```bash
 kubectl apply -f deployment.yaml
 ```
-and then
+Make sure that the `deployment.yaml` file contains the necessary configuration specific to your Django application. This includes information such as the container image, resource specifications, environment variables, and any other deployment-related settings.
 
+After applying the deployment configuration, it's time to configure the Kubernetes service for your application. Run the following command in the Cloud Shell Editor:
 ```bash
 kubectl apply -f services.yaml
 ```
+Ensure that the `services.yaml` file contains the appropriate configuration for the services associated with your application, including ports, load balancing settings, and other networking details.
 
-Finally, the external id for LoadBalancer can be used as the primary IP for running the application.
+Once the deployment and service configurations are successfully applied, you can obtain the external IP address of the LoadBalancer. This IP address can be used as the primary access point for your application.
+
+In conclusion, by following these steps, you can effectively deploy your Django web application with object detection capabilities using OpenCV on a Docker-based environment within Google Cloud Platform. Leveraging Kubernetes and GCP allows for seamless scaling, enhanced security, and efficient resource management. We anticipate that this deployment will empower your application to deliver exceptional performance and provide an intuitive user experience.
